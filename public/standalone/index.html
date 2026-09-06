@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daniel Kidanu & Yerosen Desalegn - 3D Brotherhood Journey</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Floating Minimal Controls (No boring header/footer!) -->
+  <div class="floating-controls">
+    <button id="soundBtn" class="floating-btn" title="Toggle Ambient Chimes">
+      <span id="soundText">Sound: Off</span>
+    </button>
+    <button id="autoScrollBtn" class="floating-btn" title="Auto 3D Flythrough">
+      <span id="autoText">Auto Glide</span>
+    </button>
+  </div>
+
+  <!-- Floating Names Tag (Top Left) -->
+  <div class="floating-tag">
+    <span class="tag-dot"></span>
+    <span class="tag-name">Daniel Kidanu & Yerosen Desalegn</span>
+  </div>
+
+  <!-- Floating Vertical Milestone Scrubber (Right) -->
+  <div class="floating-scrubber" id="scrubber">
+    <div class="scrub-item active" data-target="0">2018</div>
+    <div class="scrub-item" data-target="0.18">2020</div>
+    <div class="scrub-item" data-target="0.36">2022</div>
+    <div class="scrub-item" data-target="0.55">2024</div>
+    <div class="scrub-item" data-target="0.74">2025</div>
+    <div class="scrub-item" data-target="0.95">2026</div>
+  </div>
+
+  <!-- Starfield Canvas for 3D depth -->
+  <canvas id="starfield"></canvas>
+
+  <!-- 3D Viewport Stage -->
+  <div class="viewport-stage">
+    <div id="world3D" class="world-3d">
+      
+      <!-- CHAPTER 0 -->
+      <article class="chapter-card" style="--tx: 0px; --ty: 0px; --tz: -200px; --ry: 0deg;">
+        <div class="card-glass">
+          <div class="card-badge">2018 &bull; Origin of Brotherhood</div>
+          <!-- Real Photo -->
+          <div class="card-photo-box">
+            <img src="../founder-image-wrap.jpg" alt="Daniel Kidanu and Yerosen Desalegn" class="card-photo">
+            <div class="card-photo-tag">My stupid friend and me 😭</div>
+          </div>
+          <h2 class="card-title">The Handshake & The Spark</h2>
+          <p class="card-subtitle">Where Two Brothers Met and Changed Everything</p>
+          <div class="card-divider"></div>
+          <p class="card-text">
+            It began with an ordinary afternoon that turned into a brotherhood for life. Daniel and Yerosen crossed paths—two ambitious young men with big personalities, sharp humor, and an immediate mutual respect. Within minutes, formal talk was replaced by roasting each other like brothers who grew up under the same roof.
+          </p>
+          <div class="dialogue-box">
+            <p><strong>Yerosen:</strong> "Bro, you talk way too much."</p>
+            <p><strong>Daniel:</strong> "And you listen way too carefully. We are stuck together now."</p>
+          </div>
+          <blockquote class="card-quote">
+            "Some people are just friends; others become the brother life forgot to give you."
+          </blockquote>
+        </div>
+      </article>
+
+      <!-- FLOATING POLAROID 1 -->
+      <div class="memory-artifact polaroid" style="--tx: -360px; --ty: -120px; --tz: -700px; --ry: 18deg; --rz: -8deg;">
+        <div class="polaroid-inner">
+          <div class="polaroid-photo">
+            <img src="../founder-image-wrap.jpg" alt="Daniel and Yerosen" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div class="polaroid-caption">Day One Energy 😭 🔥</div>
+        </div>
+      </div>
+
+      <!-- CHAPTER 1 -->
+      <article class="chapter-card" style="--tx: -60px; --ty: -20px; --tz: -1600px; --ry: 6deg;">
+        <div class="card-glass">
+          <div class="card-badge">2020 &bull; The Visionaries</div>
+          <h2 class="card-title">Late Night Walks & Big Ambitions</h2>
+          <p class="card-subtitle">Cold Breezes, Big Plans & Building an Empire</p>
+          <div class="card-divider"></div>
+          <p class="card-text">
+            We spent countless hours walking through quiet streets under the streetlamps, plotting out our futures. We talked about building startups, mastering code and business, making our families proud, and never settling for an average life. When everyone else was sleeping, Daniel and Yerosen were sharpening each other’s minds.
+          </p>
+          <div class="dialogue-box">
+            <p><strong>Daniel:</strong> "We’re really gonna make it out of here, aren’t we?"</p>
+            <p><strong>Yerosen:</strong> "It’s already written, man. Just gotta put in the work every single day."</p>
+          </div>
+          <blockquote class="card-quote">
+            "Iron sharpens iron. A true brother doesn’t let you stay comfortable with mediocrity."
+          </blockquote>
+        </div>
+      </article>
+
+      <!-- CHAPTER 2 -->
+      <article class="chapter-card" style="--tx: 70px; --ty: 30px; --tz: -3000px; --ry: -7deg;">
+        <div class="card-glass">
+          <div class="card-badge">2022 &bull; Unshakable Loyalty</div>
+          <h2 class="card-title">Brothers in the Trenches</h2>
+          <p class="card-subtitle">When The World Got Heavy, Neither Walked Away</p>
+          <div class="card-divider"></div>
+          <p class="card-text">
+            Life threw real challenges our way—stressful seasons, setbacks that tested our patience, and days where giving up felt tempting. But through every storm, there was zero hesitation. If Yerosen was fighting a battle, Daniel was in his corner with gloves up. If Daniel was carrying a heavy burden, Yerosen showed up without even being asked.
+          </p>
+          <div class="dialogue-box">
+            <p><strong>Yerosen:</strong> "Rough week, bro. Head’s everywhere."</p>
+            <p><strong>Daniel:</strong> "Say no more. Get in the car, we handle it right now."</p>
+          </div>
+          <blockquote class="card-quote">
+            "A fake friend asks what happened. A brother brings backup before you even call."
+          </blockquote>
+        </div>
+      </article>
+
+      <!-- CHAPTER 3 -->
+      <article class="chapter-card" style="--tx: -80px; --ty: -40px; --tz: -4400px; --ry: 8deg;">
+        <div class="card-glass">
+          <div class="card-badge">2024 &bull; Zero Filter</div>
+          <h2 class="card-title">The Unspoken Brotherhood Code</h2>
+          <p class="card-subtitle">Merciless Roasts in Public, Total Support in Private</p>
+          <div class="card-divider"></div>
+          <p class="card-text">
+            Anyone watching us from the outside hears nonstop jokes and laughs. That caption says it all: "My stupid friend and me." But underneath all the teasing lies an unspoken truth: there isn’t a single thing we wouldn’t do for one another. True friendship means laughing at each other without ever losing trust.
+          </p>
+          <div class="dialogue-box">
+            <p><strong>Daniel:</strong> "Look at this photo, you look hilarious man."</p>
+            <p><strong>Yerosen:</strong> "Don't act like you’re not the main reason the photo is funny, bro!"</p>
+          </div>
+          <blockquote class="card-quote">
+            "True male friendship: roasting each other 24/7, but defending each other with everything you have."
+          </blockquote>
+        </div>
+      </article>
+
+      <!-- CHAPTER 4 -->
+      <article class="chapter-card" style="--tx: 60px; --ty: 20px; --tz: -5800px; --ry: -6deg;">
+        <div class="card-glass">
+          <div class="card-badge">2025 &bull; Unstoppable Momentum</div>
+          <h2 class="card-title">Leveling Up Side by Side</h2>
+          <p class="card-subtitle">From Big Talk to Real Milestones</p>
+          <div class="card-divider"></div>
+          <p class="card-text">
+            The crazy ideas we brainstormed years ago are turning into reality. Every accomplishment Daniel celebrates is Yerosen’s victory too, and every height Yerosen reaches has Daniel clapping loudest in the front row. Two brothers moving forward with power, purpose, and unstoppable momentum.
+          </p>
+          <blockquote class="card-quote">
+            "When your brother wins, the whole team wins. That’s the only way to build an empire."
+          </blockquote>
+        </div>
+      </article>
+
+      <!-- FINALE CHAPTER 5 -->
+      <article class="chapter-card finale" style="--tx: 0px; --ty: 0px; --tz: -7200px; --ry: 0deg;">
+        <div class="card-glass finale-glass">
+          <div class="card-badge gold-badge">&infin; Brothers for Life</div>
+          <div class="card-photo-box">
+            <img src="../founder-image-wrap.jpg" alt="Daniel Kidanu and Yerosen Desalegn" class="card-photo">
+            <div class="card-photo-tag">Daniel Kidanu & Yerosen Desalegn</div>
+          </div>
+          <h2 class="card-title finale-title">An Unbreakable Bond</h2>
+          <p class="card-subtitle">A Lifetime Warranty on Brotherhood</p>
+          <div class="card-divider gold-divider"></div>
+          <p class="card-text">
+            Years will pass, seasons will turn, and we will take on the highest peaks life has to offer. But the foundation between Daniel Kidanu and Yerosen Desalegn will remain as solid as bedrock. From those park selfies and late-night jokes to whatever grand heights the future holds—two brothers, one vision, and an unbreakable bond forever.
+          </p>
+          <div class="stats-row">
+            <div class="stat-pill"><span class="stat-num">8+</span> Years Strong</div>
+            <div class="stat-pill"><span class="stat-num">100%</span> Loyalty</div>
+            <div class="stat-pill"><span class="stat-num">&infin;</span> Brotherhood</div>
+          </div>
+          <div class="finale-actions">
+            <button id="confettiBtn" class="btn-primary">Celebrate Brotherhood! 🎉</button>
+            <button id="rewindBtn" class="btn-secondary">Rewind to Day 1</button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- Scroll spacer for 3D navigation -->
+  <div id="scrollTrack" class="scroll-track"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,400 @@
+/* ==========================================================================
+   Daniel Kidanu & Yerosen Desalegn - 3D Brotherhood Journey (Pure CSS 3D)
+   ========================================================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-primary: #07080d;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --accent-gold: #f59e0b;
+  --accent-blue: #38bdf8;
+  --card-bg: rgba(14, 16, 26, 0.85);
+  --card-border: rgba(255, 255, 255, 0.14);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(ellipse 80% 60% at 50% -20%, rgba(30, 64, 175, 0.25), transparent),
+    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(217, 119, 6, 0.15), transparent);
+  min-height: 100vh;
+}
+
+/* Background Canvas */
+#starfield {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Scroll spacer creates 850vh scrollable track */
+.scroll-track {
+  height: 850vh;
+  width: 100%;
+}
+
+/* Fixed 3D Viewport Stage */
+.viewport-stage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  perspective: 1100px;
+  perspective-origin: 50% 50%;
+  overflow: hidden;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+/* 3D World container moved by camera Z & rotation */
+.world-3d {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* Floating Minimal Controls (No boring header/footer!) */
+.floating-controls {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+  z-index: 100;
+}
+
+.floating-btn {
+  background: rgba(15, 17, 26, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #e2e8f0;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease;
+}
+
+.floating-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.floating-tag {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: rgba(15, 17, 26, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 8px 18px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  z-index: 100;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.tag-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 10px #10b981;
+}
+
+/* Floating Vertical Scrubber */
+.floating-scrubber {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 100;
+  background: rgba(10, 12, 20, 0.5);
+  backdrop-filter: blur(8px);
+  padding: 12px 8px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.scrub-item {
+  font-family: monospace;
+  font-size: 11px;
+  color: #64748b;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.scrub-item:hover, .scrub-item.active {
+  color: #f59e0b;
+  font-weight: bold;
+}
+
+/* Chapter Card 3D Styling */
+.chapter-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translate3d(var(--tx), var(--ty), var(--tz)) rotateY(var(--ry));
+  width: 90vw;
+  max-width: 580px;
+  transform-style: preserve-3d;
+  pointer-events: auto;
+  transition: opacity 0.2s;
+}
+
+.card-glass {
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+  transform-style: preserve-3d;
+  transition: transform 0.2s ease-out;
+}
+
+.card-glass:hover {
+  border-color: rgba(56, 189, 248, 0.4);
+  transform: translateZ(20px);
+}
+
+.card-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  color: #38bdf8;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.card-subtitle {
+  font-size: 14px;
+  color: #f59e0b;
+  margin-top: 6px;
+  font-weight: 600;
+}
+
+.card-divider {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.4), rgba(245, 158, 11, 0.3), transparent);
+  margin: 18px 0;
+}
+
+.card-text {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #e2e8f0;
+  margin-bottom: 18px;
+}
+
+/* Card Real Photo Embed */
+.card-photo-box {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+}
+
+.card-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  filter: contrast(1.05);
+}
+
+.card-photo-tag {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Dialogue Box */
+.dialogue-box {
+  background: rgba(0, 0, 0, 0.4);
+  border-left: 3px solid #38bdf8;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+.dialogue-box p {
+  margin-bottom: 6px;
+}
+.dialogue-box p:last-child {
+  margin-bottom: 0;
+}
+
+.dialogue-box strong {
+  color: #38bdf8;
+}
+
+.card-quote {
+  border-left: 2px solid #f59e0b;
+  padding-left: 14px;
+  font-style: italic;
+  font-size: 13px;
+  color: #cbd5e1;
+}
+
+/* Floating Polaroid Artifact */
+.memory-artifact {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translate3d(var(--tx), var(--ty), var(--tz)) rotateY(var(--ry)) rotateZ(var(--rz));
+  transform-style: preserve-3d;
+  pointer-events: auto;
+}
+
+.polaroid-inner {
+  background: #fff;
+  color: #111;
+  padding: 12px 12px 20px 12px;
+  border-radius: 12px;
+  width: 250px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.8), 0 0 20px rgba(56, 189, 248, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.polaroid-inner:hover {
+  transform: scale(1.05) translateZ(30px);
+}
+
+.polaroid-photo {
+  width: 100%;
+  height: 240px;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.polaroid-caption {
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 10px;
+  text-align: center;
+  color: #1e293b;
+}
+
+/* Finale Card */
+.finale-glass {
+  border: 2px solid rgba(245, 158, 11, 0.4);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(245, 158, 11, 0.15);
+  text-align: center;
+}
+
+.gold-badge {
+  background: rgba(245, 158, 11, 0.2);
+  border-color: rgba(245, 158, 11, 0.4);
+  color: #fbbf24;
+}
+
+.stats-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.stat-pill {
+  background: rgba(255, 255, 255, 0.06);
+  padding: 10px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 12px;
+}
+
+.stat-num {
+  font-weight: 800;
+  font-size: 16px;
+  color: #f59e0b;
+  display: block;
+}
+
+.finale-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #f59e0b, #ea580c, #3b82f6);
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(245, 158, 11, 0.3);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 12px 20px;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+}
