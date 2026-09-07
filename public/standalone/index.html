@@ -40,6 +40,19 @@
   <!-- Starfield Canvas for 3D depth -->
   <canvas id="starfield"></canvas>
 
+  <!-- Hidden SVG with permanent gold gradient definitions -->
+  <svg width="0" height="0" style="position:absolute;pointer-events:none;opacity:0;" aria-hidden="true">
+    <defs>
+      <linearGradient id="gold-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#fffbeb" />
+        <stop offset="25%" stop-color="#fef08a" />
+        <stop offset="55%" stop-color="#facc15" />
+        <stop offset="85%" stop-color="#eab308" />
+        <stop offset="100%" stop-color="#ca8a04" />
+      </linearGradient>
+    </defs>
+  </svg>
+
   <!-- 3D Viewport Stage -->
   <div class="viewport-stage">
     <div id="world3D" class="world-3d">
@@ -142,6 +155,48 @@
       <!-- CHAPTER 4 -->
       <article class="chapter-card" style="--tx: 60px; --ty: 20px; --tz: -5800px; --ry: -6deg;">
         <div class="card-glass">
+          <div class="floating-card-heart sinusoidal-sway" aria-label="Brotherhood Bond">
+            <div class="custom-heart-tooltip" role="tooltip">
+              <span class="custom-heart-tooltip-dot"></span>
+              <span>Brotherhood Bond</span>
+              <div class="custom-heart-tooltip-notch"></div>
+            </div>
+            <div class="heart-trail-container">
+              <span class="heart-trail-particle" style="--trail-sway-x: -9px; --trail-rot: -14deg; --trail-duration: 2.5s; --trail-delay: 0s; color: #fb7185;">
+                <svg viewBox="0 0 24 24" width="7" height="7" fill="currentColor"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              </span>
+              <span class="heart-trail-particle" style="--trail-sway-x: 8px; --trail-rot: 12deg; --trail-duration: 2.8s; --trail-delay: 0.36s; color: #f43f5e;">
+                <svg viewBox="0 0 24 24" width="8" height="8" fill="currentColor"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              </span>
+              <span class="heart-trail-particle" style="--trail-sway-x: -7px; --trail-rot: -8deg; --trail-duration: 2.4s; --trail-delay: 0.72s; color: #fde047;">
+                <svg viewBox="0 0 24 24" width="6" height="6" fill="currentColor"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              </span>
+              <span class="heart-trail-particle" style="--trail-sway-x: 9px; --trail-rot: 16deg; --trail-duration: 2.7s; --trail-delay: 1.08s; color: #f472b6;">
+                <svg viewBox="0 0 24 24" width="7" height="7" fill="currentColor"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              </span>
+              <span class="heart-trail-particle" style="--trail-sway-x: -8px; --trail-rot: -16deg; --trail-duration: 2.6s; --trail-delay: 1.44s; color: #fda4af;">
+                <svg viewBox="0 0 24 24" width="8" height="8" fill="currentColor"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              </span>
+              <span class="heart-trail-particle" style="--trail-sway-x: 8px; --trail-rot: 10deg; --trail-duration: 2.9s; --trail-delay: 1.80s; color: #fbbf24;">
+                <svg viewBox="0 0 24 24" width="6" height="6" fill="currentColor"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              </span>
+              <span class="heart-trail-particle" style="--trail-sway-x: -6px; --trail-rot: -6deg; --trail-duration: 2.5s; --trail-delay: 2.16s; color: #ffe4e6;">
+                <svg viewBox="0 0 24 24" width="7" height="7" fill="currentColor"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              </span>
+            </div>
+            <div class="heart-sparkle-stars">
+              <span class="heart-sparkle-star" style="top: -6px; left: -8px; width: 6px; height: 6px; color: #fde047; --star-duration: 2.4s; --star-delay: 0s;"></span>
+              <span class="heart-sparkle-star" style="top: -9px; right: -7px; width: 7px; height: 7px; color: #ffffff; --star-duration: 2.8s; --star-delay: 0.8s;"></span>
+              <span class="heart-sparkle-star" style="bottom: -6px; left: -9px; width: 5px; height: 5px; color: #fb7185; --star-duration: 2.2s; --star-delay: 1.5s;"></span>
+              <span class="heart-sparkle-star" style="bottom: -7px; right: -9px; width: 6px; height: 6px; color: #fef08a; --star-duration: 2.6s; --star-delay: 0.4s;"></span>
+              <span class="heart-sparkle-star" style="top: 12px; right: -12px; width: 5px; height: 5px; color: #fda4af; --star-duration: 2.5s; --star-delay: 1.9s;"></span>
+              <span class="heart-sparkle-star" style="top: 10px; left: -12px; width: 6px; height: 6px; color: #fbbf24; --star-duration: 2.3s; --star-delay: 1.2s;"></span>
+            </div>
+            <div class="floating-card-heart-glow"></div>
+            <div class="floating-card-heart-inner sinusoidal-sway">
+              <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="rgba(244,63,94,0.6)" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            </div>
+          </div>
           <div class="card-badge">2025 &bull; Unstoppable Momentum</div>
           <h2 class="card-title">Leveling Up Side by Side</h2>
           <p class="card-subtitle">From Big Talk to Real Milestones</p>
@@ -158,6 +213,48 @@
       <!-- FINALE CHAPTER 5 -->
       <article class="chapter-card finale" style="--tx: 0px; --ty: 0px; --tz: -7200px; --ry: 0deg;">
         <div class="card-glass finale-glass">
+          <div class="floating-card-heart sinusoidal-sway" aria-label="Brotherhood Bond">
+            <div class="custom-heart-tooltip" role="tooltip">
+              <span class="custom-heart-tooltip-dot"></span>
+              <span>Brotherhood Bond</span>
+              <div class="custom-heart-tooltip-notch"></div>
+            </div>
+            <div class="heart-trail-container">
+              <span class="heart-trail-particle" style="--trail-sway-x: -9px; --trail-rot: -14deg; --trail-duration: 2.5s; --trail-delay: 0s; color: #fb7185;">
+                <svg viewBox="0 0 24 24" width="7" height="7" fill="currentColor"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              </span>
+              <span class="heart-trail-particle" style="--trail-sway-x: 8px; --trail-rot: 12deg; --trail-duration: 2.8s; --trail-delay: 0.36s; color: #f43f5e;">
+                <svg viewBox="0 0 24 24" width="8" height="8" fill="currentColor"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              </span>
+              <span class="heart-trail-particle" style="--trail-sway-x: -7px; --trail-rot: -8deg; --trail-duration: 2.4s; --trail-delay: 0.72s; color: #fde047;">
+                <svg viewBox="0 0 24 24" width="6" height="6" fill="currentColor"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              </span>
+              <span class="heart-trail-particle" style="--trail-sway-x: 9px; --trail-rot: 16deg; --trail-duration: 2.7s; --trail-delay: 1.08s; color: #f472b6;">
+                <svg viewBox="0 0 24 24" width="7" height="7" fill="currentColor"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              </span>
+              <span class="heart-trail-particle" style="--trail-sway-x: -8px; --trail-rot: -16deg; --trail-duration: 2.6s; --trail-delay: 1.44s; color: #fda4af;">
+                <svg viewBox="0 0 24 24" width="8" height="8" fill="currentColor"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              </span>
+              <span class="heart-trail-particle" style="--trail-sway-x: 8px; --trail-rot: 10deg; --trail-duration: 2.9s; --trail-delay: 1.80s; color: #fbbf24;">
+                <svg viewBox="0 0 24 24" width="6" height="6" fill="currentColor"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              </span>
+              <span class="heart-trail-particle" style="--trail-sway-x: -6px; --trail-rot: -6deg; --trail-duration: 2.5s; --trail-delay: 2.16s; color: #ffe4e6;">
+                <svg viewBox="0 0 24 24" width="7" height="7" fill="currentColor"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              </span>
+            </div>
+            <div class="heart-sparkle-stars">
+              <span class="heart-sparkle-star" style="top: -6px; left: -8px; width: 6px; height: 6px; color: #fde047; --star-duration: 2.4s; --star-delay: 0s;"></span>
+              <span class="heart-sparkle-star" style="top: -9px; right: -7px; width: 7px; height: 7px; color: #ffffff; --star-duration: 2.8s; --star-delay: 0.8s;"></span>
+              <span class="heart-sparkle-star" style="bottom: -6px; left: -9px; width: 5px; height: 5px; color: #fb7185; --star-duration: 2.2s; --star-delay: 1.5s;"></span>
+              <span class="heart-sparkle-star" style="bottom: -7px; right: -9px; width: 6px; height: 6px; color: #fef08a; --star-duration: 2.6s; --star-delay: 0.4s;"></span>
+              <span class="heart-sparkle-star" style="top: 12px; right: -12px; width: 5px; height: 5px; color: #fda4af; --star-duration: 2.5s; --star-delay: 1.9s;"></span>
+              <span class="heart-sparkle-star" style="top: 10px; left: -12px; width: 6px; height: 6px; color: #fbbf24; --star-duration: 2.3s; --star-delay: 1.2s;"></span>
+            </div>
+            <div class="floating-card-heart-glow"></div>
+            <div class="floating-card-heart-inner sinusoidal-sway">
+              <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="rgba(244,63,94,0.6)" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            </div>
+          </div>
           <div class="card-badge gold-badge">&infin; Brothers for Life</div>
           <div class="card-photo-box">
             <img src="../founder-image-wrap.jpg" alt="Daniel Kidanu and Yerosen Desalegn" class="card-photo">

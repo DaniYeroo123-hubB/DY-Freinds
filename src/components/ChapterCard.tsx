@@ -1,12 +1,14 @@
 import React, { useRef, useState } from 'react';
 import { Chapter, FriendshipProfile } from '../types';
-import { Sparkles, Compass, Shield, Flame, HeartHandshake, Infinity as InfinityIcon, MessageCircle } from 'lucide-react';
+import { Sparkles, Compass, Shield, Flame, HeartHandshake, Infinity as InfinityIcon, MessageCircle, Heart } from 'lucide-react';
+import { InteractiveFloatingHeart } from './InteractiveFloatingHeart';
 
 interface ChapterCardProps {
   chapter: Chapter;
   profile: FriendshipProfile;
   cameraZ: number;
   onJumpToNext?: () => void;
+  floatingHeart?: React.ReactNode;
 }
 
 export const ChapterCard: React.FC<ChapterCardProps> = ({
@@ -14,6 +16,7 @@ export const ChapterCard: React.FC<ChapterCardProps> = ({
   profile,
   cameraZ,
   onJumpToNext,
+  floatingHeart,
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [cardTilt, setCardTilt] = useState({ x: 0, y: 0, glareX: 50, glareY: 50 });
@@ -86,7 +89,17 @@ export const ChapterCard: React.FC<ChapterCardProps> = ({
     }
   };
 
-  const isFinalChapter = chapter.index === 5;
+  const isUnstoppableMomentum =
+    chapter.index === 4 ||
+    Boolean(chapter.badge && /unstoppable/i.test(chapter.badge)) ||
+    Boolean(chapter.title && /momentum/i.test(chapter.title));
+
+  const isFinalChapter =
+    chapter.index === 5 ||
+    Boolean(chapter.badge && /finale/i.test(chapter.badge)) ||
+    Boolean(chapter.badge && /brothers for life/i.test(chapter.badge));
+
+  const showFloatingHeart = isUnstoppableMomentum || isFinalChapter;
   const hasPhoto = !!chapter.image;
 
   // 3D positioning transform
@@ -129,6 +142,17 @@ export const ChapterCard: React.FC<ChapterCardProps> = ({
             : '0 25px 50px rgba(0, 0, 0, 0.6)',
         }}
       >
+        {/* Subtle floating animated heart icon emphasizing emotional bond */}
+        {floatingHeart !== undefined ? (
+          floatingHeart
+        ) : showFloatingHeart ? (
+          <InteractiveFloatingHeart
+            id={`floating-heart-chapter-${chapter.id}`}
+            label={`Emotional bond - ${chapter.title}`}
+            enableParticleBurst={isUnstoppableMomentum || isFinalChapter}
+          />
+        ) : null}
+
         {/* Dynamic Holographic Glare */}
         {isHovered && (
           <div

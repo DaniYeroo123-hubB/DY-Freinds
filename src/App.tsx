@@ -30,6 +30,16 @@ export default function App() {
   const [isAudioOn, setIsAudioOn] = useState(false);
   const [isAutoScrolling, setIsAutoScrolling] = useState(false);
 
+  // Track activated (clicked) floating-card-hearts acknowledging the brotherhood bond
+  const [activatedHearts, setActivatedHearts] = useState<Record<string, boolean>>({});
+
+  const handleActivateHeart = useCallback((heartId: string) => {
+    setActivatedHearts((prev) => ({
+      ...prev,
+      [heartId]: true,
+    }));
+  }, []);
+
   // Refs for animation loop
   const cameraZRef = useRef(0);
   const targetZRef = useRef(0);
@@ -226,6 +236,8 @@ export default function App() {
         profile={profile}
         onJumpToNextChapter={handleJumpToNextChapter}
         onRewind={handleRewind}
+        activatedHearts={activatedHearts}
+        onActivateHeart={handleActivateHeart}
       />
 
       {/* Friendship Echo Ambient Indicator */}

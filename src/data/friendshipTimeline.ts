@@ -97,7 +97,7 @@ export const chapters: Chapter[] = [
     ],
     pos: { x: 60, y: 20, z: -5800, rotY: -6 },
     visualType: 'reunion',
-    badge: 'Grade 9 Brotherhood',
+    badge: 'Unstoppable Momentum • Grade 9',
   },
   {
     id: 'ch5',
@@ -115,7 +115,7 @@ export const chapters: Chapter[] = [
     ],
     pos: { x: 0, y: 0, z: -7200, rotY: 0 },
     visualType: 'forever',
-    badge: 'Brothers for Life',
+    badge: 'Finale • Brothers for Life',
   },
 ];
 

@@ -1,19 +1,22 @@
 import React, { useRef, useState } from 'react';
 import { FriendshipProfile } from '../types';
-import { Shield, Sparkles, RotateCcw, Award, Flame } from 'lucide-react';
+import { Shield, Sparkles, RotateCcw, Award, Flame, Heart } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { soundEngine } from '../utils/audio';
+import { InteractiveFloatingHeart } from './InteractiveFloatingHeart';
 
 interface FinaleKeepsakeProps {
   profile: FriendshipProfile;
   cameraZ: number;
   onRewind: () => void;
+  floatingHeart?: React.ReactNode;
 }
 
 export const FinaleKeepsake: React.FC<FinaleKeepsakeProps> = ({
   profile,
   cameraZ,
   onRewind,
+  floatingHeart,
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0, glareX: 50, glareY: 50 });
@@ -106,6 +109,17 @@ export const FinaleKeepsake: React.FC<FinaleKeepsakeProps> = ({
             : '0 25px 50px rgba(0, 0, 0, 0.7)',
         }}
       >
+        {/* Subtle floating animated heart icon above Finale card emphasizing emotional bond */}
+        {floatingHeart !== undefined ? (
+          floatingHeart
+        ) : (
+          <InteractiveFloatingHeart
+            id="floating-heart-finale-card"
+            label="Emotional brotherhood bond - Finale"
+            enableParticleBurst={true}
+          />
+        )}
+
         {/* Dynamic Holographic Glare */}
         {isHovered && (
           <div

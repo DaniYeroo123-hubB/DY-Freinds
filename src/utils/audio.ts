@@ -33,8 +33,8 @@ class AmbientSoundEngine {
     return !this.isMuted;
   }
 
-  public playChime(freq = 523.25, duration = 1.2) {
-    if (this.isMuted) return;
+  public playChime(freq = 523.25, duration = 1.2, force = false) {
+    if (this.isMuted && !force) return;
     try {
       this.init();
       if (!this.ctx || !this.gainNode) return;
@@ -133,6 +133,58 @@ class AmbientSoundEngine {
     } catch {
       // guard
     }
+  }
+
+  /**
+   * Subtle, pleasant harmonic pop & crystalline chime for heart interactions
+   */
+  public playHeartPop(force = true) {
+    if (this.isMuted && !force) return;
+    try {
+      this.init();
+      if (!this.ctx || !this.gainNode) return;
+
+      const now = this.ctx.currentTime;
+
+      // 1. Soft, bubbly acoustic pop
+      const popOsc = this.ctx.createOscillator();
+      const popGain = this.ctx.createGain();
+      popOsc.type = 'sine';
+      popOsc.frequency.setValueAtTime(360, now);
+      popOsc.frequency.exponentialRampToValueAtTime(820, now + 0.035);
+      popOsc.frequency.exponentialRampToValueAtTime(440, now + 0.08);
+
+      popGain.gain.setValueAtTime(0.001, now);
+      popGain.gain.exponentialRampToValueAtTime(0.09, now + 0.015);
+      popGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.12);
+
+      popOsc.connect(popGain);
+      popGain.connect(this.gainNode);
+      popOsc.start(now);
+      popOsc.stop(now + 0.13);
+
+      // 2. Sweet sparkling harmonic chime overlay (A5 -> C6 chime)
+      const chimeOsc = this.ctx.createOscillator();
+      const chimeGain = this.ctx.createGain();
+      chimeOsc.type = 'sine';
+      chimeOsc.frequency.setValueAtTime(880, now + 0.015);
+      chimeOsc.frequency.exponentialRampToValueAtTime(1046.5, now + 0.05);
+
+      chimeGain.gain.setValueAtTime(0.0001, now);
+      chimeGain.gain.exponentialRampToValueAtTime(0.06, now + 0.03);
+      chimeGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.5);
+
+      chimeOsc.connect(chimeGain);
+      chimeGain.connect(this.gainNode);
+      chimeOsc.start(now + 0.015);
+      chimeOsc.stop(now + 0.52);
+    } catch {
+      // Audio autoplay policy guard
+    }
+  }
+
+  public playHeartChime(force = true) {
+    this.playHeartPop(force);
   }
 }
 

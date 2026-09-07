@@ -5,6 +5,7 @@ import { MemoryArtifact } from './MemoryArtifact';
 import { FinaleKeepsake } from './FinaleKeepsake';
 import { FriendshipEchoes } from './FriendshipEchoes';
 import { MilestonePolaroids3D } from './MilestonePolaroids3D';
+import { InteractiveFloatingHeart } from './InteractiveFloatingHeart';
 import { friendshipEchoes as defaultEchoes, milestonePolaroids as defaultMilestonePolaroids } from '../data/friendshipTimeline';
 
 interface ThreeDWorldProps {
@@ -19,6 +20,8 @@ interface ThreeDWorldProps {
   profile: FriendshipProfile;
   onJumpToNextChapter: (currentIndex: number) => void;
   onRewind: () => void;
+  activatedHearts?: Record<string, boolean>;
+  onActivateHeart?: (heartId: string) => void;
 }
 
 export const ThreeDWorld: React.FC<ThreeDWorldProps> = ({
@@ -33,6 +36,8 @@ export const ThreeDWorld: React.FC<ThreeDWorldProps> = ({
   profile,
   onJumpToNextChapter,
   onRewind,
+  activatedHearts = {},
+  onActivateHeart,
 }) => {
   // World transform with smoothed camera position and mouse tilt
   const worldTransform = `translateZ(${cameraZ}px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg)`;
@@ -131,16 +136,54 @@ export const ThreeDWorld: React.FC<ThreeDWorldProps> = ({
           />
         )}
 
-        {/* Milestone Chapters */}
-        {chapters.map((chapter) => (
-          <ChapterCard
-            key={chapter.id}
-            chapter={chapter}
-            profile={profile}
-            cameraZ={cameraZ}
-            onJumpToNext={() => onJumpToNextChapter(chapter.index)}
-          />
-        ))}
+        {/* Milestone Chapters: Locate 'Unstoppable Momentum' and 'Finale' cards */}
+        {chapters.map((chapter) => {
+          // Locate the chapter cards for 'Unstoppable Momentum' and 'Finale'
+          const isUnstoppableMomentum =
+            chapter.index === 4 ||
+            Boolean(chapter.badge && /unstoppable/i.test(chapter.badge)) ||
+            Boolean(chapter.title && /momentum/i.test(chapter.title));
+
+          const isFinale =
+            chapter.index === 5 ||
+            Boolean(chapter.badge && /finale/i.test(chapter.badge)) ||
+            Boolean(chapter.title && /unbreakable bond/i.test(chapter.title));
+
+          const showFloatingHeart = isUnstoppableMomentum || isFinale;
+          const cardName = isUnstoppableMomentum ? 'Unstoppable Momentum' : isFinale ? 'Finale' : chapter.title;
+
+          return (
+            <div
+              key={chapter.id}
+              id={`chapter-card-wrapper-${chapter.id}`}
+              data-chapter-name={cardName}
+              className="contents"
+            >
+              <ChapterCard
+                chapter={chapter}
+                profile={profile}
+                cameraZ={cameraZ}
+                onJumpToNext={() => onJumpToNextChapter(chapter.index)}
+                floatingHeart={
+                  showFloatingHeart ? (
+                    <InteractiveFloatingHeart
+                      id={`floating-heart-icon-${chapter.id}`}
+                      label={`Emotional bond - ${cardName}`}
+                      tooltipText={
+                        activatedHearts[`floating-heart-icon-${chapter.id}`]
+                          ? "Brotherhood Bond Acknowledged ✨"
+                          : "Brotherhood Bond"
+                      }
+                      isActivated={!!activatedHearts[`floating-heart-icon-${chapter.id}`]}
+                      onActivate={() => onActivateHeart?.(`floating-heart-icon-${chapter.id}`)}
+                      enableParticleBurst={true}
+                    />
+                  ) : null
+                }
+              />
+            </div>
+          );
+        })}
 
         {/* Floating Memory Artifacts */}
         {memoryArtifacts.map((item) => (
@@ -151,12 +194,28 @@ export const ThreeDWorld: React.FC<ThreeDWorldProps> = ({
           />
         ))}
 
-        {/* Finale Keepsake Module */}
-        <FinaleKeepsake
-          profile={profile}
-          cameraZ={cameraZ}
-          onRewind={onRewind}
-        />
+        {/* Finale Keepsake Module with floating animated heart icon */}
+        <div id="finale-keepsake-wrapper" data-chapter-name="Finale" className="contents">
+          <FinaleKeepsake
+            profile={profile}
+            cameraZ={cameraZ}
+            onRewind={onRewind}
+            floatingHeart={
+              <InteractiveFloatingHeart
+                id="floating-heart-icon-finale-keepsake"
+                label="Emotional bond - Finale"
+                tooltipText={
+                  activatedHearts['floating-heart-icon-finale-keepsake']
+                    ? "Brotherhood Bond Acknowledged ✨"
+                    : "Brotherhood Bond"
+                }
+                isActivated={!!activatedHearts['floating-heart-icon-finale-keepsake']}
+                onActivate={() => onActivateHeart?.('floating-heart-icon-finale-keepsake')}
+                enableParticleBurst={true}
+              />
+            }
+          />
+        </div>
       </div>
     </div>
   );
